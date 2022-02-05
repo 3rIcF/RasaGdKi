@@ -8,6 +8,8 @@ TOKEN = os.getenv('OTMwODYwMTMzMTY3MjcxOTc2.Yd8BDg.lBLzMTm8JomVUT1_m7w0-pkbr6I')
 
 client = discord.Client()
 
+
+
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
