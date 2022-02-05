@@ -1,34 +1,114 @@
-version: "3.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_greet:
-  - text: "Hallo! Wie geht es Ihnen?"
-
-  utter_cheer_up:
-  - text: "Hier ist etwas, das Sie aufmuntern wird:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Hat Ihnen das geholfen??"
-
-  utter_happy:
-  - text: "Toll, weiter so!"
-
-  utter_goodbye:
-  - text: "Tschüss"
-
-  utter_iamabot:
-  - text: "Ich bin ein Bot, angetrieben von Rasa."
-
+version: '3.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- give_name
+- greet
+- repeat_name
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- give_time
+- give_next_appointment
+- inform_entryname
+- inform_date
+- inform_starttime
+- inform_duration
+- make_entry
+- helloworld
+actions:
+- action_recieve_name
+- action_say_name
+- action_show_next_appointment
+- action_show_time
+- utter_greet
+- action_make_entry
+- action_empty_entry_slot
+entities:
+- name
+- number_of_aps
+- entryname
+- date
+- starttime
+- duration
+
+responses:
+  utter_greet:
+  - text: Hey! Wie geht`s?
+  utter_ask_entryname:
+  - text: "Wie soll Ihr Kalendereintrag heißen?"
+
+  utter_ask_date:
+  - text: "An welchem Datum findet der Termin statt? (YYYY-MM-DD)"
+
+  utter_ask_starttime:
+  - text: "Wann beginnt der Termin? (HH:MM)"
+
+  utter_ask_duration:
+  - text: "Wie lange dauert dauert der Termin? (HH)"
+
+  utter_entry_made:
+  - text: "{entryname} wurde zu Ihrem Kalender hinzugefügt auf {date}, starting at {starttime} für {duration} Stunden"
+  - text: "{entryname} wurde zu deinem Kalender hinzugefügt: Am {date}, startet um {starttime} und geht {duration} Stunden"
+  utter_cheer_up:
+  - text: 'Hier ist etwas, das Sie aufmuntern wird:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Hat Ihnen das geholfen?
+  utter_happy:
+  - text: Großartig, wie kann ich Ihnen helfen?
+  utter_goodbye:
+  - text: Ciao, bis bald
+  utter_iamabot:
+  - text: Ich bin ein Bot, powered by Rasa. Ich wurde für GdKI gebaut!
+  utter_ask_name:
+  - text: Wie ist dein Name?
+
+
+slots:
+  number_of_aps:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number_of_aps
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: name
+  entryname:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: entryname
+  date:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: date
+  starttime:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: starttime
+  duration:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: duration
+
+
+forms:
+  entry_form:
+    required_slots:
+      - entryname
+      - date
+      - starttime
+      - duration
+

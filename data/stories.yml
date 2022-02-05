@@ -1,6 +1,20 @@
 version: "3.0"
 
 stories:
+- story: greet
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: make_entry
+    - action: entry_form
+    - active_loop: entry_form
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: helloworld
+  steps:
+    - intent: helloworld
+    - action: action_make_entry
 
 - story: happy path
   steps:
@@ -28,3 +42,33 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: path about time
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: give_time
+  - action: action_show_time
+
+- story: path get next appointments
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: give_next_appointment
+  - action: action_show_next_appointment
+
+- story: path name
+  steps:
+  - intent: give_name
+  - action: action_recieve_name
+  - intent: repeat_name
+  - action: action_say_name
+
+- story: path name
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: give_name
+  - action: action_recieve_name
+  - intent: repeat_name
+  - action: action_say_name

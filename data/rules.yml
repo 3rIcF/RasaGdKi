@@ -11,3 +11,25 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: submit form
+  condition:
+  - active_loop: entry_form
+  steps:
+  - action: entry_form
+  - active_loop: null
+  - action: action_make_entry
+  - action: utter_entry_made
+  - action: action_empty_entry_slot
+  - action: utter_greet
+
+- rule: Say the next Appointments
+  steps:
+  - intent: give_next_appointment
+  - action: action_show_next_appointment
+
+- rule: Repeat my name
+  steps:
+  - intent: repeat_name
+  - action: action_say_name
+

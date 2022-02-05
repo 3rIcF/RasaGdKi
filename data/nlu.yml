@@ -52,8 +52,20 @@ nlu:
 - intent: mood_great
   examples: |
     - perfekt
+    - ich fühle mich gut
     - großartig
     - großartig
+    - Ich fühle mich wie ein König
+    - wunderbar
+    - Ich fühle mich sehr gut
+    - Ich bin großartig
+    - Ich bin erstaunlich
+    - Ich werde die Welt retten
+    - super aufgeregt
+    - extrem gut
+    - so perfekt
+    - so gut
+    - so perfekt
     - sich wie ein König fühlen
     - wunderbar
     - Ich fühle mich sehr gut
@@ -65,6 +77,11 @@ nlu:
     - so perfekt
     - so gut
     - so perfekt
+    - mir gehts gut
+    - gut
+    - gut und dir?
+    - toll
+    - sehr gut
 
 - intent: mood_unhappy
   examples: |
@@ -89,3 +106,139 @@ nlu:
     - Sind Sie ein Mensch?
     - Spreche ich mit einem Bot?
     - Spreche ich mit einem Menschen?
+
+
+- intent: make_entry
+  examples: |
+    - Kalendereintrag vornehmen
+    - Ich möchte einen Eintrag hinzufügen
+    - Ich habe einen Termin
+    - Kalendereintrag vornehmen
+    - Ich möchte einen Eintrag hinzufügen
+    - Ich habe einen Termin
+    - Ich möchte einen Termin anlegen
+    - mache einen termin
+    - ich brauche einen termin
+    - erstelle einen termin
+    - kalender eintrag
+    - kalender eintrag
+
+- intent: inform_entryname
+  examples: |
+    - [Sally's Birthday](entryname)
+    - [Meeting with Dave](entryname)
+    - [Zoom meeting](entryname)
+    - [Coffee with Mike](entryname)
+    - [Deadline for Project](entryname)
+    - [Doctors appointment](entryname)
+    - [Launch party](entryname)
+    - [Last day of work](entryname)
+
+- intent: inform_date
+  examples: |
+    - [2022-01-15](date)
+    - [2023-05-30](date)
+    - [2022-02-01](date)
+    - [2022-11-07](date)
+
+- intent: inform_starttime
+  examples: |
+    - [09:00](starttime)
+    - [12:00](starttime)
+    - [14:20](starttime)
+    - [20:00](starttime)
+    - [00:00](starttime)
+    - [07:00](starttime)
+    - [22:00](starttime)
+    - [22:00](starttime)
+
+- intent: inform_duration
+  examples: |
+    - [02](duration)
+    - [01](duration)
+    - [03](duration)
+    - [04](duration)
+    - [05](duration)
+    - [06](duration)
+
+- intent: read_entry
+  examples: |
+    - When is my next appointment?
+    - What's my next event?
+    - Wann ist mein nächster Termin?
+    - Was ist meine nächste Veranstaltung?
+- intent: give_time
+  examples: |
+    - Sag mir die Uhrzeit
+    - Wie spät ist es jetzt?
+    - Wie spät ist es?
+    - Können Sie mir die Uhrzeit sagen?
+- intent: give_next_appointment
+  examples: |
+    - Was sind meine [11](number_of_aps) nächsten Termine
+    - Was sind meine [55](number_of_aps) nächste Termine
+    - Was sind meine [100](number_of_aps) nächste Termine
+    - Was sind meine [2](number_of_aps) nächste Termine
+    - Was sind meine [8](number_of_aps) nächsten Termine
+    - Was sind meine [5](number_of_aps) nächste Termine
+    - Was sind meine [34](number_of_aps) nächste Termine
+    - can you tell me the next [8](number_of_aps) Termine
+    - Was sind meine [three](number_of_aps) nächsten Termine
+    - Was sind meine [nine](number_of_aps) nächste Termine
+    - Was sind meine [two](number_of_aps) nächsten Termine
+    - Gene die nächsten [two](number_of_aps) Termine
+    - Gebe die nächsten [6](number_of_aps) Termine
+    - was sind meine nächste termine
+    - gib mir die nächsten [three](number_of_aps)termin
+    - welche termine habe ich heute noch
+    - habe ich heute noch termine
+- intent: number_of_aps
+  examples: |
+    - 11
+    - 55
+    - 6
+    - 3
+    - 8
+    - 101
+- intent: give_name
+  examples: |
+    - Ich heiße [Jürgen](name)
+    - [James](name) ist mein name
+    - ich bin [Eric](name)
+    - mein name ist [Eric](name)
+    - mein name ist [Paul](name)
+    - mein name ist [Harry Potter](name)
+    - mein name ist [James Bond](name)
+    - [Eric](name)
+    - [Daniel](name)
+    - [Eric Friedrich](name)
+    - [Karl Jürgen](name)
+    - [Hans Gerten](name)
+    - [Edel](name)
+    - [Johann](name)
+    - [Johann Decher](name)
+    - [Herr Lucke](name)
+    - [James Bond](name)
+    - [Bonny](name)
+    - mein name ist [eric](name)
+    - mein name ist [eric](name)
+    - ich bin [eric](name)
+    - ich heiße [eric](name)
+- intent: repeat_name
+  examples: |
+    - Wie lautet mein Name?
+    - Wiederhole meinen Namen
+    - Wissen Sie, wer ich bin?
+    - Kennen Sie meinen Namen?
+    - Sag mir meinen Namen
+    - Sag meinen Namen
+    - Wie lautet mein Name?
+    - Wiederhole meinen Namen
+    - Wissen Sie, wer ich bin?
+    - Kennen Sie meinen Namen?
+    - Sag mir meinen Namen
+    - Sag meinen Name
+- lookup: name
+  examples: |
+    - data/names
+
