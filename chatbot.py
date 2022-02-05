@@ -24,7 +24,9 @@ async def on_member_join(member):
 #Wait for a new Message
 @client.event
 async def on_message(message):
+	
 	#Verify that the User is not the Bot itself
+	
 	if message.author != client.user:
 		#Use curl_request Function (located in rasa_connection.py)
 		answers = curl_request(message.content, str(message.author))
