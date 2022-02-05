@@ -10,7 +10,8 @@ from cgitb import text
 import datetime as dt
 from typing import Any, Text, Dict, List
 
-import actions.quickstartRead
+import actions.Cal_Read
+import actions.Cal_Write
 
 
 
@@ -30,7 +31,7 @@ class ActionGetCurrentTime(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         print(dt.datetime.now)
-        dispatcher.utter_message(text=f"Die aktuelle Zeit ist + {dt.datetime.now()}")
+        dispatcher.utter_message(text=f"{dt.datetime.now()}")
 
         return []
 
@@ -48,10 +49,10 @@ class ActionSaveName(Action):
         name = tracker.get_slot("name")
         if(name=="None"):
             
-            dispatcher.utter_message(f"Ich konnte Ihren Namen nicht verstehen!?")
+            dispatcher.utter_message(f"I couldn`t understand your name!?")
             return[]
         
-        dispatcher.utter_message(f"Ahhh! Hallo, {name}!")
+        dispatcher.utter_message(f"Ahhh! Hello, {name}!")
         
         return [SlotSet("name", name)]
 
@@ -97,7 +98,7 @@ class ActionShowNextAppointment(Action):
 
 
         
-        app = actions.quickstartRead.main(entry_number_of_aps)
+        app = actions.Cal_Read.main(entry_number_of_aps)
         for event in app:
             start = event['start'].get('dateTime', event['start'].get('date'))
             dispatcher.utter_message(text=f"{start, event['summary']}")
@@ -122,7 +123,23 @@ class ActionSayName(Action):
         name = tracker.get_slot("name")
         print("name: ",name)
         if not name:
-            dispatcher.utter_message(text=f"Ich kenne Ihren Namen nicht!")
+            dispatcher.utter_message(text=f"I don`t know your name!")
         else:
-            dispatcher.utter_message(text=f"Dein Name ist {name}")
+            dispatcher.utter_message(text=f"Your name is {name}")
+        return []
+
+
+class ActionMakeEntry(Action): 
+
+    def name(self) -> Text:
+        return "action_make_entry"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        entryname = tracker.get_slot("entryname")
+        date = tracker.get_slot("date")
+        starttime = tracker.get_slot("starttime")
+        duration = tracker.get_slot("duration")
+        actions.Cal_Write.main(entryname, date, starttime, duration)
         return []

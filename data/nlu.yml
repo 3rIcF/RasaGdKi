@@ -238,6 +238,7 @@ nlu:
     - Kennen Sie meinen Namen?
     - Sag mir meinen Namen
     - Sag meinen Name
+    - wie ist mein name?
 - lookup: name
   examples: |
     - data/names
