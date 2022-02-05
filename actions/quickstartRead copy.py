@@ -1,8 +1,9 @@
-from __future__ import print_function
+#from __future__ import print_function
 from calendar import c
 
 import datetime
 import os.path
+import pickle
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -14,22 +15,35 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def main():
+    number_of_aps = "2"
 #def main(number_of_aps):
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
-    number_of_aps = "2"
+    
+    
     print("number_of_aps: ",number_of_aps)
+
     creds = None
-    # The file token2.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists('token2.json'):
-        creds = Credentials.from_authorized_user_file('token2.json', SCOPES)
+    
+
+    #  The file token2.json stores the user's access and refresh tokens, and is
+    #  created automatically when the authorization flow completes for the first
+    # # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+        
+
+
+
+        #creds = Credentials.from_authorized_user_file('token.pickle', SCOPES)
+        
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+             creds.refresh(Request())
         else:
             print("number_of_aps: ",number_of_aps)
             client_json = os.path.dirname(os.path.realpath(__file__) + '/client_secret.json')
@@ -37,9 +51,10 @@ def main():
             flow = InstalledAppFlow.from_client_secrets_file(
                 client_json, SCOPES)
             creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
+        # # Save the credentials for the next run
+        with open('token2.pickle', 'w') as token:
+            pickle.dump(creds, token)
+            #token.write(creds.to_json())
 
     try:
         service = build('calendar', 'v3', credentials=creds)

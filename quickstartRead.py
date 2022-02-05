@@ -21,25 +21,25 @@ def main():
     number_of_aps = "2"
     print("number_of_aps: ",number_of_aps)
     creds = None
-    # The file token2.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists('token2.json'):
-        creds = Credentials.from_authorized_user_file('token2.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            print("number_of_aps: ",number_of_aps)
-            client_json = os.path.dirname(os.path.realpath(__file__) + '/client_secret.json')
-            print("open client *.json: ", client_json)
-            flow = InstalledAppFlow.from_client_secrets_file(
-                client_json, SCOPES)
-            creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
+    # # The file token2.json stores the user's access and refresh tokens, and is
+    # # created automatically when the authorization flow completes for the first
+    # # time.
+    # if os.path.exists('token2.json'):
+    #     creds = Credentials.from_authorized_user_file('token2.json', SCOPES)
+    # # If there are no (valid) credentials available, let the user log in.
+    # if not creds or not creds.valid:
+    #     if creds and creds.expired and creds.refresh_token:
+    #         creds.refresh(Request())
+    #     else:
+    #         print("number_of_aps: ",number_of_aps)
+    #         client_json = os.path.dirname(os.path.realpath(__file__) + '/client_secret.json')
+    #         print("open client *.json: ", client_json)
+    #         flow = InstalledAppFlow.from_client_secrets_file(
+    #             client_json, SCOPES)
+    #         creds = flow.run_local_server(port=0)
+    #     # Save the credentials for the next run
+    #     with open('token2.json', 'w') as token:
+    #         token.write(creds.to_json())
 
     try:
         service = build('calendar', 'v3', credentials=creds)
