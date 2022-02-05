@@ -13,12 +13,19 @@ from googleapiclient.errors import HttpError
 
 
 
-def main(number_of_aps):
+def main(entryname, date, starttime, duration):
     
     CLIENT_SECRET_FILE="client_secret.json"
     API_SERVICE_NAME = 'Calender'
     API_VERSION = 'v3'
     SCOPES=['https://www.googleapis.com/auth/calendar']
+
+    starttime = str(starttime)[:2]
+    endtime = str(int(starttime) + int(duration))
+    endtime = endtime
+    print(starttime)
+    print(duration)
+    print(endtime)
     
 
     cred = None
@@ -56,26 +63,30 @@ def main(number_of_aps):
         print(API_SERVICE_NAME, 'service created successfully')
         
 ##Hier kommt der Code rein
-        # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        print('Getting the upcoming X events')
-        #hole nächsten 3 Termine
-        events_result = service.events().list(calendarId='primary', timeMin=now,
-                                              maxResults=number_of_aps, singleEvents=True,
-                                              #maxResults=3, singleEvents=True,
-                                              orderBy='startTime').execute()
-        events = events_result.get('items', [])
+         # Call the Calendar API
+        #now = datetime.datetime.now(timezone.gmt).isoformat()  # 'Z' indicates UTC time
+        now = datetime.datetime.utcnow.isoformat() + 'Z'  # 'Z' indicates UTC time
 
-        if not events:
-            print('No upcoming events found.')
-            return
+        ###hier insert
+        event = {
+            'summary': entryname,
+            'description': 'A chance to hear more about Google\'s developer products.',
+            'start': {
+                'dateTime': date + 'T' + starttime + ':00:00-00:00',
+                'timeZone': 'Europe/Berlin',
+            },
+            'end': {
+                'dateTime': date + 'T' + endtime + ':00:00-00:00',
+                'timeZone': 'Europe/Berlin',
+            },
 
-        # Prints the start and name of the next X events
-        for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
-            print(start, event['summary'])
+        }
+        
 
-        return events
+
+        event = service.events().insert(calendarId='primary', body=event).execute()
+        print('Event created: %s' % (event.get('htmlLink')))
+
 
 
     except Exception as e:
