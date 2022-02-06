@@ -85,5 +85,3 @@ def main(number_of_aps):
 
 
 
-if __name__ == '__main__':
-    main()

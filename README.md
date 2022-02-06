@@ -1,48 +1,43 @@
-# RasaGdKi
 
-Zuerst env erstellen mit python 3.7.2
-Wir hatten auch das neuste und 3.8 verwendet. Allerdings gab es hier immer irgendwelche pakackes, welche sich nicht mit den neueren Versionen verstanden haben.
-1. conda create -n rasagdki python==3.7.2
+Rasa installieren
+$ pip install rasa
 
-env starten. Dies hat auch nicht in der Powershell funktiniert. Nach langen ausprobieren haben wir dann festgestellt, dases wirklich an der powershell liegt und wir sind auf den cmd terminal umgestiegen
-2. conda activate rasagdki
+Discord packages installieren
+$ pip3 install discord.py python_dotenv pytz requests
 
-Auch hatten wir mit pip3 sowie mit pip unsere Porbleme. Am Ende hat es am ebsten mit pip 20.2 funktiniert.
+Um die Discord API auf einem eigenen Bot zu nutzen, muss der Discord Token in der StartDiscordConnection ausgetauscht werden.
 
-3. pip install --upgrade pip==20.2
+Google API Installieren
+$ pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-Installation von rasa
-4. pip install rasa
+Um Die Google API selbst zu verwenden, muss unter Google Cloud Plattforms ein eigener OAuth 2.0 Client erstellt werden. Der Cleint-Secret muss client_secret.json genannt werden unter unter actions abgelegt werden. 
+Um den ersten Token zu erstellen kann CreateFirstToken.py aufgeführt werden.
 
-Jetzt werden ersteinmal die ganzen fehler ausgemerzt, da sanic und tensorflow auf einem zu neuen stand sind.
-Das hat dann jedoch nicht funktiniert. deshalb habe ich noch einmal rasa gelöscht und es doch mit pip3 versucht was dann auch nicht funktioniert hat. wir haben es dann mit dem befehl 
+Spacy German NLU
+$ pip3 install spacy==3.0.6
+$ pip install packages/de_ner_demo_replace-0.0.0/
 
-5. pip uninstall rasa
+Um Pipelines für Spacy zu konfigurieren config.yml pipelines bearbeiten zu:
+pipeline:
+  - name: SpacyNLP
+  - name: SpacyTokenizer
+  - name: SpacyFeaturizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
 
-Auf stackoverflow haben wir folgende lösung gefunden
-
-6. pip install <PACKAGE> --use-feature=2020-resolver
-
-Rasa wurde jetzt erfolgreich isntalliert!
-
-Wir richten das directory ein mit dem Befehl und trainieren das Model
-
-7. rasa init
-
-Das Framework ist jetzt betriebsbereit und es können erste tests gemacht werden ob alles läuft.
-
-Der Assistent kann mit
-8. rasa shell direkt getestet werden
-
-
-
-
-
-
-
-
-
-
-
-
-
+Um alles zu starten:
+$ rasa train nlu
+$ rasa train
+$ rasa run
+$ rasa run actions
+$ StartDiscordConnection.py

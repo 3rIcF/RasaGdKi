@@ -8,10 +8,13 @@
 # This is a simple example for a custom action which utters "Hello World!"
 from cgitb import text
 import datetime as dt
+import imp
 from typing import Any, Text, Dict, List
 
-import actions.Cal_Read
-import actions.Cal_Write
+from actions import Cal_Read
+from actions import Cal_Write
+
+
 
 
 
@@ -98,7 +101,7 @@ class ActionShowNextAppointment(Action):
 
 
         
-        app = actions.Cal_Read.main(entry_number_of_aps)
+        app = Cal_Read.main(entry_number_of_aps)
         for event in app:
             start = event['start'].get('dateTime', event['start'].get('date'))
             dispatcher.utter_message(text=f"{start, event['summary']}")
@@ -141,5 +144,5 @@ class ActionMakeEntry(Action):
         date = tracker.get_slot("date")
         starttime = tracker.get_slot("starttime")
         duration = tracker.get_slot("duration")
-        actions.Cal_Write.main(entryname, date, starttime, duration)
+        Cal_Write.main(entryname, date, starttime, duration)
         return []

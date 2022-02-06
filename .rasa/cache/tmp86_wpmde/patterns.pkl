@@ -1,0 +1,6 @@
+[
+  {
+    "name": "name",
+    "pattern": "(\\bdata/names\\b)"
+  }
+]

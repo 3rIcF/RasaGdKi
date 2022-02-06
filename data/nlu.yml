@@ -189,7 +189,6 @@ nlu:
     - Gene die nächsten [two](number_of_aps) Termine
     - Gebe die nächsten [6](number_of_aps) Termine
     - was sind meine nächste termine
-    - gib mir die nächsten [three](number_of_aps)termin
     - welche termine habe ich heute noch
     - habe ich heute noch termine
 - intent: number_of_aps
